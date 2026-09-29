@@ -1,4 +1,4 @@
-# Burgers-Equation
+# Burgers-PINN
 A PINN that learns the viscous Burgers' equation, including a sharp shock, without seeing any solution data during training. Written in pure PyTorch.
 
 **u_t + u·u_x = ν·u_xx**, ν = 0.01/π, x ∈ [-1, 1], t ∈ [0, 1]
