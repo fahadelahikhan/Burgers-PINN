@@ -8,8 +8,7 @@ IC: u(x,0) = -sin(πx) | BC: u(±1, t) = 0
 ![Heatmaps](burgers_heatmaps.png)
 
 ## Result
-Validated against the high-accuracy reference solution from
-[Raissi's PINNs repo](https://github.com/maziarraissi/PINNs) (256 × 100 grid).
+Validated against the high-accuracy reference solution from [Raissi's PINNs repo](https://github.com/maziarraissi/PINNs) (256 × 100 grid).
 
 | Stage | Relative L2 error |
 |---|---|
@@ -25,10 +24,9 @@ Away from the shock (|x| > 0.05) the error is 0.0025. Max pointwise error is 0.0
 - **Loss:** `1·PDE + 20·IC + 20·BC` (mean squared errors). The PDE residual `u_t + u·u_x − ν·u_xx` is computed with autograd (`create_graph=True`).
 - **Points:** 10,000 random interior, 200 initial, 200 per wall. RAR then adds the 5,000 worst-residual points from 50,000 random candidates, so the training set concentrates at the shock (mean |x| of new points = 0.18 vs 0.5 uniform).
 - **Training:** Adam (lr 1e-3, decayed) → RAR → Adam (lr 5e-4, then decayed) → L-BFGS.
-- **Reproducibility:** `torch.manual_seed(0)`. A full rerun on CPU reproduced every
-  printed number.
+- **Reproducibility:** `torch.manual_seed(0)`. A full rerun on CPU reproduced every printed number.
 
-## What I learned
+## Note
 - The shock is the hard part: uniform sampling puts ~1% of points in it, so plain Adam and L-BFGS both stalled at 7.5% error.
 - Pointwise error at a shock is dominated by tiny position shifts, so max error alone is misleading. I report relL2 and off-shock error too.
 - RAR (like adaptive mesh refinement in CFD) fixed it by placing points where the residual was large. After that, L-BFGS became useful (1083 evaluations, vs 18 before).
@@ -41,4 +39,4 @@ Away from the shock (|x| > 0.05) the error is 0.0025. Max pointwise error is 0.0
 - Training uses t ∈ [0, 1]; the reference grid ends at t = 0.99.
 
 ## Run
-Open `burgers_pinn.ipynb` in Google Colab and run the cells in order (CPU works but is slow; a T4 GPU is faster).
+Open `Burgers'_Equation.ipynb` in Google Colab and run the cells in order (CPU works but is slow; a T4 GPU is faster).
