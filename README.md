@@ -39,4 +39,4 @@ Away from the shock (|x| > 0.05) the error is 0.0025. Max pointwise error is 0.0
 - Training uses t ∈ [0, 1]; the reference grid ends at t = 0.99.
 
 ## Run
-Open `Burgers'_Equation.ipynb` in Google Colab and run the cells in order (CPU works but is slow; a T4 GPU is faster).
+Open `Burgers-PINN.ipynb` in Google Colab and run the cells in order (CPU works but is slow; a T4 GPU is faster).
